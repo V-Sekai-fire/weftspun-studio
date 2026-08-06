@@ -1,0 +1,36 @@
+name: Deploy weftspun-studio to Fly.io
+
+# RFD 0062's toplevel. RFD 0120 split this app out of
+# weftspun-3d-studio into its own repo; this workflow moved with it,
+# and no longer needs a working-directory step, since fly.toml sits
+# at this repo's own root now. Uses a deploy-scoped token
+# (`flyctl tokens create deploy --app weftspun-studio`), not a
+# personal one, stored as the FLY_API_TOKEN repo secret.
+
+on:
+  push:
+    branches:
+      - main
+
+# One deploy at a time. A push mid-deploy cancels the run already in
+# flight instead of queuing a second flyctl deploy against the same
+# Fly app.
+concurrency:
+  group: deploy-fly
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      # RFD 0079: keeps the Fly secret in sync with the GitHub
+      # secret of record on every deploy.
+      - run: flyctl secrets set --stage --app weftspun-studio APPSIGNAL_PUSH_API_KEY="$APPSIGNAL_PUSH_API_KEY"
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+          APPSIGNAL_PUSH_API_KEY: ${{ secrets.APPSIGNAL_PUSH_API_KEY }}
+      - run: flyctl deploy --remote-only --app weftspun-studio
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}

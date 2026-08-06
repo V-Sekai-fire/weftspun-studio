@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2026 K. S. Ernest (iFire) Lee
+#
+# Private network joining weftspun-crdb, weftspun, and
+# weftspun-usd-viewer. RFD 0058. RFD 0120 split those three apps
+# into their own repos; this one shared unit stays here, in
+# weftspun-studio, since weftspun_studio is the one app that
+# requires both of the others reachable.
+
+[Network]
+NetworkName=weftspun
