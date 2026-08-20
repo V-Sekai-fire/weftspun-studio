@@ -3,7 +3,7 @@
 
 defmodule WeftspunStudio.Adapters.EctoFactStore do
   @moduledoc """
-  Driven adapter: trust scored facts held in CockroachDB.
+  Driven adapter: trust scored facts held in the studio's database.
 
   This is the durable twin of `WeftspunStudio.FactStore`. The Agent
   store rebuilds from the RFD 0016 inventory at every boot, so a

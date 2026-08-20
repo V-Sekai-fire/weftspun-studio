@@ -5,20 +5,22 @@ defmodule WeftspunStudio.Repo do
   @moduledoc """
   The database connection for the studio core.
 
-  RFD 0020 selects the V-Sekai CockroachDB build. CockroachDB speaks
-  the PostgreSQL wire protocol, so `Ecto.Adapters.Postgres` drives it
-  without a separate adapter.
+  RFD 0020 selected the V-Sekai CockroachDB build and RFD 0067 kept
+  it. Both are retracted, and `cockroach-local` is archived, so the
+  store is a SQLite file this service owns outright.
 
-  Two differences matter:
+  The natural keys stay. They were adopted because CockroachDB gives
+  no gap free `SERIAL`, and they are still the right shape: a catalog
+  fact has a natural key, so an integer id would be a second name for
+  the same row.
 
-    * CockroachDB has no advisory lock, so `migration_lock: false`.
-    * CockroachDB gives no `SERIAL` gap free sequence, so the tables
-      here use a natural key instead of an integer id.
+  `migration_lock: false` is gone. It existed for CockroachDB's
+  missing advisory lock, and that constraint left with the database.
   """
 
   use Ecto.Repo,
     otp_app: :weftspun_studio,
-    adapter: Ecto.Adapters.Postgres
+    adapter: Ecto.Adapters.SQLite3
 
   @doc "True when the pool holds a live connection."
   @spec up?() :: boolean()

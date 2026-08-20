@@ -1,8 +1,8 @@
 import Config
 
-# Persistence. RFD 0020 selects the V-Sekai CockroachDB build. It
-# speaks the PostgreSQL wire protocol, so the Postgres adapter drives
-# it without change.
+# Persistence. RFD 0020 selected the V-Sekai CockroachDB build and RFD
+# 0067 kept it. Both are retracted, so the store is a SQLite file the
+# service owns, and each environment states its own path.
 config :weftspun_studio, ecto_repos: [WeftspunStudio.Repo]
 
 # RFD 0019 selects EXLA, and nothing else. EXLA compiles Nx.Defn
