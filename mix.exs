@@ -43,8 +43,7 @@ defmodule WeftspunStudio.MixProject do
       {:hrr, github: "weftspun/elixir-holographic-reduced-representation"},
       # Provisions and runs the local CockroachDB host. It downloads
       # the same V-Sekai 22.1 build that RFD 0020 selects.
-      {:cockroach_local, github: "weftspun/cockroach-local"},
-      # Single-binary packaging. Needs Zig at build time.
+            # Single-binary packaging. Needs Zig at build time.
       {:burrito, "~> 1.0"},
       {:jason, "~> 1.4"},
       # HTTP surface. Smallest slice that serves the client.
@@ -61,7 +60,7 @@ defmodule WeftspunStudio.MixProject do
       # Persistence. CockroachDB speaks the PostgreSQL wire protocol,
       # so Ecto drives it through Postgrex. RFD 0020 records why.
       {:ecto_sql, "~> 3.12"},
-      {:postgrex, "~> 0.19"},
+      {:ecto_sqlite3, "~> 0.17"},
       # Mocks for the API surface the UI consumes.
       {:mox, "~> 1.1", only: :test},
       # Observability. Traces every request through Plug.Router

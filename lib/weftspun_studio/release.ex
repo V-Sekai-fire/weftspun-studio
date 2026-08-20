@@ -14,12 +14,14 @@ defmodule WeftspunStudio.Release do
   @doc """
   Creates the database if it does not exist yet.
 
-  A fresh CockroachDB node (RFD 0058's `weftspun-crdb` container, on
-  its first boot) holds no `weftspun_studio` database, and
+  A host booting for the first time holds no database file, and
   `Ecto.Migrator.with_repo/2` connects to a database rather than
-  creating one — `migrate/0` alone errors with `invalid_catalog_name`
-  against an empty cluster. `storage_up/1` is idempotent, so calling
-  this every boot is safe.
+  creating one, so `migrate/0` alone fails on a path that does not
+  exist yet. `storage_up/1` is idempotent, so calling this every boot
+  is safe.
+
+  The volume still has to survive a redeploy. That is the one thing a
+  file store asks of its host that a connection string did not.
   """
   @spec create() :: :ok
   def create do

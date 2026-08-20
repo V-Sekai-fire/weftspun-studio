@@ -7,7 +7,7 @@ defmodule WeftspunStudio.Facts.Fact do
 
   The shape follows the hermes-agent holographic memory store. The
   model id is the primary key, because a catalog fact already has a
-  natural key and CockroachDB gives no gap free integer sequence.
+  natural key, so an integer id would be a second name for the row.
 
   `hrr_vector` holds the packed float64 phase vector from
   `WeftspunStudio.FactVector.encode/2`. The column is `bytea`, so the

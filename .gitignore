@@ -7,3 +7,8 @@ erl_crash.dump
 *.ez
 /burrito_out/
 /.crdb/
+
+# SQLite database files
+*.db
+*.db-shm
+*.db-wal
