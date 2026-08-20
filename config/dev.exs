@@ -4,7 +4,7 @@ import Config
 # works, and no insecure root user to warn anybody about.
 config :weftspun_studio, WeftspunStudio.Repo,
   database:
-    System.get_env("WEFTSPUN_DB", Path.expand("../weftspun_studio_dev.db", __DIR__)),
+    System.get_env("WEFTSPUN_DB_PATH", Path.expand("../weftspun_studio_dev.db", __DIR__)),
   pool_size: 5
 
 # RFD 0076: usd_viewer_app runs as its own app now (its own `npm
