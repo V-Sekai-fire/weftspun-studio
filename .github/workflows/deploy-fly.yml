@@ -10,7 +10,7 @@ name: Deploy weftspun-studio to Fly.io
 on:
   push:
     branches:
-      - main
+      - main/main
 
 # One deploy at a time. A push mid-deploy cancels the run already in
 # flight instead of queuing a second flyctl deploy against the same
