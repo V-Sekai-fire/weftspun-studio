@@ -56,7 +56,7 @@ defmodule WeftspunStudio.MixProject do
       {:req, "~> 0.5"},
       # The HTN planner. RFD 0037 models each pipeline as a RECTGTN
       # domain, and priv/domains holds them.
-      {:taskweft, github: "taskweft/taskweft", ref: "main"},
+      {:taskweft, github: "V-Sekai-fire/interactor-taskweft", branch: "main/from-taskweft"},
       # Persistence. CockroachDB speaks the PostgreSQL wire protocol,
       # so Ecto drives it through Postgrex. RFD 0020 records why.
       {:ecto_sql, "~> 3.12"},
